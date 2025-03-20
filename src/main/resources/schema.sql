@@ -3,14 +3,14 @@ create table if not exists students
     student_id   serial primary key,
     student_name varchar(50) not null,
     email        varchar(50) not null unique,
-    phone_number varchar(20) not null
+    phone_number varchar(50) not null
 );
 
 create table if not exists instructors
 (
     instructor_id   serial primary key,
-    instructor_name varchar(50),
-    email           varchar(50) unique
+    instructor_name varchar(50) not null,
+    email           varchar(255) unique
 );
 CREATE TABLE courses
 (

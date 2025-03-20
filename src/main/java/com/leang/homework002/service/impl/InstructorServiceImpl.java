@@ -2,24 +2,26 @@ package com.leang.homework002.service.impl;
 
 import com.leang.homework002.entity.model.Instructor;
 import com.leang.homework002.entity.request.InstructorRequest;
+import com.leang.homework002.exception.NotFoundException;
 import com.leang.homework002.repository.InstructorRepository;
 import com.leang.homework002.service.InstructorService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.ErrorResponseException;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class InstructorServiceImpl implements InstructorService {
     private final InstructorRepository instructorRepository;
 
-    public InstructorServiceImpl(InstructorRepository instructorRepository) {
-        this.instructorRepository = instructorRepository;
-    }
-
     @Override
-    public Instructor getInstructorById(Long id) {
-        return instructorRepository.getInstructorById(id);
+    public Instructor getInstructorById(Long instructorId) {
+        Instructor instructorById = instructorRepository.getInstructorById(instructorId);
+        if (instructorById == null) {
+            throw new NotFoundException("Instructor with id " + instructorId);
+        }
+        return instructorById;
     }
 
     @Override
@@ -34,12 +36,14 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     @Override
-    public Instructor updateInstructorById(Long id, InstructorRequest instructorRequest) {
-        return instructorRepository.updateInstructorById(id, instructorRequest);
+    public Instructor updateInstructorById(Long instructorId, InstructorRequest instructorRequest) {
+        getInstructorById(instructorId);
+        return instructorRepository.updateInstructorById(instructorId, instructorRequest);
     }
 
     @Override
     public void removeInstructorByID(Long instructorId) {
+        getInstructorById(instructorId);
         instructorRepository.removeInstructorByID(instructorId);
     }
 }

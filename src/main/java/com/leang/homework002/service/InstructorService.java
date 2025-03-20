@@ -6,9 +6,9 @@ import com.leang.homework002.entity.request.InstructorRequest;
 import java.util.List;
 
 public interface InstructorService {
-    Instructor getInstructorById(Long id);
+    Instructor getInstructorById(Long instructorId);
     List<Instructor> getAllInstructors(int offset, int size);
     Instructor addInstructor(InstructorRequest instructorRequest);
-    Instructor updateInstructorById(Long id,InstructorRequest instructorRequest);
+    Instructor updateInstructorById(Long instructorId,InstructorRequest instructorRequest);
     void removeInstructorByID(Long instructorId);
 }

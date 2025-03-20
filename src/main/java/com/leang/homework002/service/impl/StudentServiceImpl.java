@@ -3,10 +3,11 @@ package com.leang.homework002.service.impl;
 import com.leang.homework002.entity.model.Course;
 import com.leang.homework002.entity.model.Student;
 import com.leang.homework002.entity.request.StudentRequest;
-import com.leang.homework002.repository.CourseRepository;
+import com.leang.homework002.exception.NotFoundException;
 import com.leang.homework002.repository.StudentCourseRepository;
 import com.leang.homework002.repository.StudentRepository;
 import com.leang.homework002.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +15,18 @@ import java.util.List;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
     private final StudentCourseRepository studentCourseRepository;
 
-    public StudentServiceImpl(StudentRepository studentRepository, StudentCourseRepository studentCourseRepository, CourseRepository courseRepository) {
-        this.studentRepository = studentRepository;
-        this.studentCourseRepository = studentCourseRepository;
-    }
-
     @Override
-    public Student getStudentById(Long id) {
-        return studentRepository.getStudentById(id);
+    public Student getStudentById(Long studentId) {
+        Student studentById = studentRepository.getStudentById(studentId);
+        if (studentById == null) {
+            throw new NotFoundException("Student with id " + studentId);
+        }
+        return studentById;
     }
 
     @Override
@@ -45,6 +46,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student updateStudentById(Long studentId, StudentRequest studentRequest) {
+        getStudentById(studentId);
         Student studentById = getStudentById(studentId);
         List<Course> oldCourses = studentById.getCourses();
         //remove all existing course
@@ -62,6 +64,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void removeStudentById(Long studentId) {
+        getStudentById(studentId);
         studentRepository.removeStudentById(studentId);
     }
 }
