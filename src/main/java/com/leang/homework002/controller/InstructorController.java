@@ -30,7 +30,7 @@ public class InstructorController {
 
     @Operation(summary = "Get all instructors")
     @GetMapping
-    public ResponseEntity<ApiResponse<List<Instructor>>> getAllInstructors(@RequestParam(defaultValue = "1") @Positive int offset, @RequestParam(defaultValue = "10") @Positive int size) {
+    public ResponseEntity<ApiResponse<List<Instructor>>> getAllInstructors(@RequestParam(defaultValue = "1") @Positive Integer offset, @RequestParam(defaultValue = "10") @Positive Integer size) {
         List<Instructor> instructors = instructorService.getAllInstructors(offset, size);
         return ResponseEntity.ok(ApiResponse.<List<Instructor>>builder().message("All instructors have been successfully fetched.").payload(instructors).status(HttpStatus.OK).time(LocalDateTime.now()).build());
     }
@@ -39,7 +39,7 @@ public class InstructorController {
     @PostMapping
     public ResponseEntity<ApiResponse<Instructor>> addInstructor(@RequestBody @Valid InstructorRequest instructorRequest) {
         Instructor instructor = instructorService.addInstructor(instructorRequest);
-        return ResponseEntity.ok(ApiResponse.<Instructor>builder().message("The instructor has been successfully added.").payload(instructor).status(HttpStatus.OK).time(LocalDateTime.now()).build());
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.<Instructor>builder().message("The instructor has been successfully added.").payload(instructor).status(HttpStatus.CREATED).time(LocalDateTime.now()).build());
     }
 
     @Operation(summary = "Update instructor by instructor id")

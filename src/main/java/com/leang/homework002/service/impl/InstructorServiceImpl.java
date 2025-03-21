@@ -25,7 +25,7 @@ public class InstructorServiceImpl implements InstructorService {
     }
 
     @Override
-    public List<Instructor> getAllInstructors(int offset, int size) {
+    public List<Instructor> getAllInstructors(Integer offset, Integer size) {
         offset = (offset - 1) * size;
         return instructorRepository.getAllInstructors(offset, size);
     }

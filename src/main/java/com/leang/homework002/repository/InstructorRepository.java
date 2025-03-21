@@ -3,7 +3,6 @@ package com.leang.homework002.repository;
 import com.leang.homework002.entity.model.Instructor;
 import com.leang.homework002.entity.request.InstructorRequest;
 import org.apache.ibatis.annotations.*;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
 

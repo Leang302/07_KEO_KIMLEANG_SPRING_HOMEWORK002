@@ -3,7 +3,6 @@ package com.leang.homework002.repository;
 import com.leang.homework002.entity.model.Student;
 import com.leang.homework002.entity.request.StudentRequest;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.executor.statement.StatementUtil;
 
 import java.util.List;
 

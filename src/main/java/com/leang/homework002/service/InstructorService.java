@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface InstructorService {
     Instructor getInstructorById(Long instructorId);
-    List<Instructor> getAllInstructors(int offset, int size);
+
+    List<Instructor> getAllInstructors(Integer offset, Integer size);
+
     Instructor addInstructor(InstructorRequest instructorRequest);
-    Instructor updateInstructorById(Long instructorId,InstructorRequest instructorRequest);
+
+    Instructor updateInstructorById(Long instructorId, InstructorRequest instructorRequest);
+
     void removeInstructorByID(Long instructorId);
 }

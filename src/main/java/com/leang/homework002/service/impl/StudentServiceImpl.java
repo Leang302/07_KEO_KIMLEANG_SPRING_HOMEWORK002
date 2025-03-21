@@ -30,7 +30,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getAllStudents(int offset, int size) {
+    public List<Student> getAllStudents(Integer offset, Integer size) {
         offset = (offset - 1) * size;
         return studentRepository.getAllStudents(offset, size);
     }

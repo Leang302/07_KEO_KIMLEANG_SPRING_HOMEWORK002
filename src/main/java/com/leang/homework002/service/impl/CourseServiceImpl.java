@@ -37,7 +37,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getAllCourses(int offset, int size) {
+    public List<Course> getAllCourses(Integer offset, Integer size) {
         offset = (offset - 1) * size;
         return courseRepository.getAllCourses(offset, size);
     }

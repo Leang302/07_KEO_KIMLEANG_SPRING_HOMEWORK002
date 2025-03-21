@@ -35,7 +35,7 @@ public class StudentController {
 
     @Operation(summary = "Get all student")
     @GetMapping
-    public ResponseEntity<ApiResponse<List<Student>>> getAllStudent(@RequestParam(defaultValue = "1") @Positive int offset, @RequestParam(defaultValue = "10") @Positive int size) {
+    public ResponseEntity<ApiResponse<List<Student>>> getAllStudent(@RequestParam(defaultValue = "1") @Positive Integer offset, @RequestParam(defaultValue = "10") @Positive Integer size) {
         List<Student> allStudents = studentService.getAllStudents(offset, size);
         return ResponseEntity.ok(ApiResponse.<List<Student>>builder()
                 .message("The student has been successfully fetched.")
@@ -49,11 +49,11 @@ public class StudentController {
     @PostMapping
     public ResponseEntity<ApiResponse<Student>> addStudent(@RequestBody @Valid StudentRequest studentRequest) {
         Student student = studentService.createStudent(studentRequest);
-        return ResponseEntity.ok(
+        return ResponseEntity.status(HttpStatus.CREATED).body(
                 ApiResponse.<Student>builder()
                         .message("The student has been successfully added.")
                         .payload(student)
-                        .status(HttpStatus.OK)
+                        .status(HttpStatus.CREATED)
                         .time(LocalDateTime.now())
                         .build());
     }

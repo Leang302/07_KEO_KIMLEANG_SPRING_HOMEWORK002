@@ -60,7 +60,7 @@ public class CourseController {
 
     @Operation(summary = "Get all courses")
     @GetMapping
-    public ResponseEntity<ApiResponse<List<Course>>> getAllCourse(@RequestParam(defaultValue = "1") @Positive int offset, @RequestParam(defaultValue = "10") @Positive int limit) {
+    public ResponseEntity<ApiResponse<List<Course>>> getAllCourse(@RequestParam(defaultValue = "1") @Positive Integer offset, @RequestParam(defaultValue = "10") @Positive Integer limit) {
         List<Course> allCourses = courseService.getAllCourses(offset, limit);
         return ResponseEntity.ok(ApiResponse.<List<Course>>builder()
                 .message("All courses have been successfully fetched.")
@@ -74,10 +74,10 @@ public class CourseController {
     @PostMapping
     public ResponseEntity<?> addCourse(@RequestBody @Valid CourseRequest courseRequest) {
         Course course = courseService.addCourse(courseRequest);
-        return ResponseEntity.ok(ApiResponse.<Course>builder()
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.<Course>builder()
                 .message("The course has been successfully added.")
                 .payload(course)
-                .status(HttpStatus.OK)
+                .status(HttpStatus.CREATED)
                 .time(LocalDateTime.now())
                 .build());
     }

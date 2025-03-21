@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface StudentService {
     Student getStudentById(Long studentId);
-    List<Student> getAllStudents(int offset,int size);
+
+    List<Student> getAllStudents(Integer offset, Integer size);
+
     Student createStudent(StudentRequest studentRequest);
-    Student updateStudentById(Long studentId,StudentRequest studentRequest);
+
+    Student updateStudentById(Long studentId, StudentRequest studentRequest);
+
     void removeStudentById(Long studentId);
 }
